@@ -26,4 +26,15 @@ defmodule Coders.CLI do
     end
   end
 
+  def process(:help) do
+    IO.puts """
+      usage: coders <location> [ language | #{@default_language} ]
+    """
+    System.halt(0)
+  end
+
+  def process({location, language}) do
+    Coders.GithubUsers.fetch(location, language)
+  end
+
 end
