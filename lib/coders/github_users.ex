@@ -10,6 +10,11 @@ defmodule Coders.GithubUsers do
     "https://api.github.com/search/users?q=+type:user+location:#{location}+language:#{language}"
   end
 
-  def handle_response({:ok, response}), do: { :ok, response }
-  def handle_response({:error, reason}), do: { :error, reason }
+  def handle_response({ :ok, %{body: body} }) do
+    {:ok, :jsx.decode(body)}
+  end
+
+  def handle_response({ :error, %{body: body} }) do 
+    {:error, :jsx.decode(body)}
+  end
 end
