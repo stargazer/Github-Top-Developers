@@ -2,7 +2,7 @@ defmodule Coders.GithubUsers do
 
   def fetch(location, language) do
     url(location, language)
-      |> HTTPoison.get
+      |> HTTPotion.get([headers: ["User-Agent": "Elixir App"]])
       |> handle_response
   end
 
@@ -10,11 +10,11 @@ defmodule Coders.GithubUsers do
     "https://api.github.com/search/users?q=+type:user+location:#{location}+language:#{language}"
   end
 
-  def handle_response({ :ok, %{body: body} }) do
-    {:ok, :jsx.decode(body)}
+  def handle_response(%{body: body, status_code: 200}) do
+    {:ok, JSON.decode(body)}
   end
 
-  def handle_response({ :error, %{body: body} }) do 
-    {:error, :jsx.decode(body)}
+  def handle_response(%{body: body, status_code: _}) do
+    {:error, JSON.decode(body)}
   end
 end
