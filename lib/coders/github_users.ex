@@ -11,10 +11,10 @@ defmodule Coders.GithubUsers do
   end
 
   def handle_response(%{body: body, status_code: 200}) do
-    {:ok, JSON.decode(body)}
+    {:ok, JSON.decode!(body)}
   end
 
   def handle_response(%{body: body, status_code: _}) do
-    {:error, JSON.decode(body)}
+    {:error, JSON.decode!(body)}
   end
 end
