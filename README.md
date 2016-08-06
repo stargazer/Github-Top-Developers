@@ -1,24 +1,11 @@
 # Coders
 
-**TODO: Add description**
+CLI tool build in Elixir, to return the top coders on Github, per location and programming language
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+Install by running
 
-  1. Add `coders` to your list of dependencies in `mix.exs`:
-
-    ```elixir
-    def deps do
-      [{:coders, "~> 0.1.0"}]
-    end
-    ```
-
-  2. Ensure `coders` is started before your application:
-
-    ```elixir
-    def application do
-      [applications: [:coders]]
-    end
-    ```
+    mix escript.build
+    ./coders <location> <language>
 
