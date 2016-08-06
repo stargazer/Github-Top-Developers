@@ -5,6 +5,7 @@ defmodule Coders.Mixfile do
     [app: :coders,
      version: "0.1.0",
      elixir: "~> 1.3",
+     escript: escript_config,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps()]
@@ -32,5 +33,9 @@ defmodule Coders.Mixfile do
       { :json,       "~> 0.3.3" },
       { :table_rex,  "~> 0.8.1" } 
     ]
+  end
+
+  defp escript_config do
+    [ main_module: Coders.CLI ]
   end
 end

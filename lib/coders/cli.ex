@@ -4,7 +4,7 @@ defmodule Coders.CLI do
   @default_language "Python"
   @default_fields   ["login", "url", "score"]
 
-  def run(argv) do
+  def main(argv) do
     parse_args(argv)
       |> process
       |> filter_response
