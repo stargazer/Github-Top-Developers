@@ -14,7 +14,7 @@ defmodule Coders.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger, :httpotion]]
+    [applications: [:logger, :httpotion, :table_rex]]
   end
 
   # Dependencies can be Hex packages:
@@ -28,8 +28,9 @@ defmodule Coders.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      { :httpotion, "~> 3.0" },
-      { :json,       "~> 0.3.3" }
+      { :httpotion,  "~> 3.0" },
+      { :json,       "~> 0.3.3" },
+      { :table_rex,  "~> 0.8.1" } 
     ]
   end
 end
