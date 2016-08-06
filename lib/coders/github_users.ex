@@ -7,7 +7,7 @@ defmodule Coders.GithubUsers do
   end
 
   def url(location, language) do
-    "https://api.github.com/search/users?q=+type:user+location:#{location}+language:#{language}"
+    "https://api.github.com/search/users?q=+type:user+location:#{location}+language:#{language}&sort=repositories&order=desc"
   end
 
   def handle_response(%{body: body, status_code: 200}) do
