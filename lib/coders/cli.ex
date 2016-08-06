@@ -34,7 +34,7 @@ defmodule Coders.CLI do
   
   def process(:help) do
     IO.puts """
-      usage: coders <location> [ language | #{@default_language} ]
+      usage: gtd <location> [ language | #{@default_language} ]
     """
     System.halt(0)
   end

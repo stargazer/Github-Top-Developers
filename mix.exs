@@ -2,7 +2,7 @@ defmodule Coders.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :coders,
+    [app: :gtd,
      version: "0.1.0",
      elixir: "~> 1.3",
      escript: escript_config,

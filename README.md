@@ -1,11 +1,16 @@
-# Coders
+# Github Top Developers
 
-CLI tool build in Elixir, to return the top coders on Github, per location and programming language
+Command line tool built in Elixir that returns Github's top developers per location and programming language.
 
-## Installation
+Returns data in tabular format.
+
+### Installation
 
 Install by running
 
     mix escript.build
-    ./coders <location> <language>
+
+### Run
+
+    ./gtd <location> <language>
 
