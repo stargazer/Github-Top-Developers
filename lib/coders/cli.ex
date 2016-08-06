@@ -1,4 +1,5 @@
 defmodule Coders.CLI do
+  import Coders.TableFormatter, only: [print_table: 2]
 
   @default_language "Python"
   @default_fields   ["login", "url", "score"]
@@ -7,6 +8,7 @@ defmodule Coders.CLI do
     parse_args(argv)
       |> process
       |> filter_fields
+      |> print_table(@default_fields)
   end
 
 
