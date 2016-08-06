@@ -7,7 +7,7 @@ defmodule Coders.CLI do
   def run(argv) do
     parse_args(argv)
       |> process
-      |> filter_fields
+      |> filter_response
       |> print_table(@default_fields)
   end
 
@@ -55,7 +55,7 @@ defmodule Coders.CLI do
 
 
   @doc """
-  `body` is the body of Github API's response. It has the form:
+  `body` is the a map with Github API's response. It has the form:
   {
     "total_count": 12,
     "incomplete_results": false,
@@ -64,13 +64,10 @@ defmodule Coders.CLI do
       { ... },
     ]
   }
-  Here we analyze the `items` list and keep the @default_fields for every item
+  This function returns the content of the `items` key
   """
-  def filter_fields(body) do
-    %{ "items" => users } = body
-    for user <- users do
-      Map.take(user, @default_fields)
-    end
+  def filter_response(body) do
+    Map.get(body, "items")
   end
 
 end
