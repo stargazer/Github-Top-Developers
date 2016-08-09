@@ -13,33 +13,36 @@ defmodule Coders.CLI do
 
 
   @doc """
-  `argv` can be -h or --help, which returns :help.
-  Otherwise it is a location (mandatory) and language (optional).
-  Returns a tuple of 
-    `{ location, language }` or 
-    `{ location }` or 
-    `:help`
+  `argv` can be:
+    * -h or --help, which returns :help.
+    * -loc <LOCATION> or --location=LOCATION
+    * -lan <LANGUAGE> or --language=LANGUAGE
+  Returns either:
+    * `:help`
+    * Keyword list [location: <LOCATION>, language: <LANGUAGE>]
   """
   def parse_args(argv) do
-    parse = OptionParser.parse(argv, switches: [ help: :boolean ],
-                                     aliases:  [ h:    :help   ])
+    parse = OptionParser.parse(argv, switches: [ help: :boolean, location: :string, language: :string ],
+                                     aliases:  [ h:    :help,    loc: :location,    lan: :language ])
     case parse do
-      { [help: true], _, _ }           ->    :help
-      { _, [ location, language ], _ } ->    { location, language }
-      { _, [ location ], _ }           ->    { location, @default_language }
-      _                                ->    :help
+      { [help: true], _, _ }                    ->    :help
+      { [location: lctn, language: lng], _, _ } ->    [ location: lctn, language: lng ]
+      { [language: lng,  location: lctn], _, _ } ->   [ location: lctn, language: lng ]
+      { [location: lctn], _, _ }                ->    [ location: lctn, language: ""  ]
+      { [language: lng], _, _ }                 ->    [ location: "",   language: lng ]
+      _                                         ->    [ location: "",   language: ""  ]
     end
   end
 
   
   def process(:help) do
     IO.puts """
-      usage: gtd <location> [ language | #{@default_language} ]
+      usage: gtd --location=<LOCATION> --language=<LANGUAGE>
     """
     System.halt(0)
   end
 
-  def process({location, language}) do
+  def process([ location: location, language: language ]) do
     Coders.GithubUsers.fetch(location, language)
       |> decode_response
   end
