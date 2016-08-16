@@ -1,4 +1,5 @@
 defmodule Coders.GithubUsers do
+  @github_url Application.get_env(:coders, :github_url)
 
   def fetch(location, language) do
     url(location, language)
@@ -7,19 +8,19 @@ defmodule Coders.GithubUsers do
   end
 
   def url("", "") do
-    "https://api.github.com/search/users?q=+type:user&sort=repositories&order=desc"
+    "#{@github_url}/search/users?q=+type:user&sort=repositories&order=desc"
   end
 
   def url(location, "") do
-    "https://api.github.com/search/users?q=+type:user+location:#{location}&sort=repositories&order=desc"
+    "#{@github_url}/search/users?q=+type:user+location:#{location}&sort=repositories&order=desc"
   end
 
   def url("", language) do
-    "https://api.github.com/search/users?q=+type:user+language:#{language}&sort=repositories&order=desc"
+    "#{@github_url}/search/users?q=+type:user+language:#{language}&sort=repositories&order=desc"
   end
 
   def url(location, language) do
-    "https://api.github.com/search/users?q=+type:user+location:#{location}+language:#{language}&sort=repositories&order=desc"
+    "#{@github_url}/search/users?q=+type:user+location:#{location}+language:#{language}&sort=repositories&order=desc"
   end
 
   def handle_response(%{body: body, status_code: 200}) do
