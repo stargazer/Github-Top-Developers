@@ -12,5 +12,5 @@ Install by running
 
 ### Run
 
-    ./gtd <location> <language>
+    ./gtd --location=<LOCATION> --language=<LANGUAGE> 
 

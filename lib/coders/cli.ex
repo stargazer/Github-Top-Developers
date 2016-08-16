@@ -1,7 +1,6 @@
 defmodule Coders.CLI do
   import Coders.TableFormatter, only: [print_table: 2]
 
-  @default_language "Python"
   @default_fields   ["login", "url", "score"]
 
   def main(argv) do
@@ -30,10 +29,10 @@ defmodule Coders.CLI do
                                                  loc:      :location,
                                                  lan:      :language ])
     case parse do
-      { [help: true], _, _ }                     -> :help
-      { options     , _, _ }                     -> Keyword.put_new(options, :location, "")
-                                                      |> Keyword.put_new(:language, "")
-                                                      |> Enum.into(Map.new)
+      { [help: true], _, _ } -> :help
+      { options     , _, _ } -> Keyword.put_new(options, :location, "")
+                               |> Keyword.put_new(:language, "")
+                               |> Enum.into(Map.new)
     end
   end
 
